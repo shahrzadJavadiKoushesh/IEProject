@@ -20,6 +20,7 @@ function App() {
     } 
     else{
       console.log("details don't match")
+      setError("Details don't match")
     }
   }
 
