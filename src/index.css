@@ -119,4 +119,10 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     font-weight: 700;
 }
 
+.error{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
 
