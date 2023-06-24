@@ -100,20 +100,6 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     background-position: 100% 0%;
 }
 
-.welcome{
-    width: 100%;
-    max-width: 480px;
-    background-color: #fff;
-    padding: 15px 30px;
-}
-
-.welcome h2{
-    color: #888;
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
 .welcome h2 span{
     color: #FE4880;
     font-weight: 700;
@@ -123,6 +109,64 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     margin-top: 10px;
     display: flex;
     justify-content: center;
+}
+
+
+.terms-container{
+    display: flex;
+}
+
+.terms-list-right{
+    background-image: linear-gradient(to top left, #FFCE00, #FE4880);
+    width: 527px;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-bar{
+    display: flex;
+    background-image: linear-gradient(to right, #FFCE00, #FE4880);
+    margin-bottom: 150px;
+    width: 100%;
+    height: 67px;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-terms{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    /* background-color: aqua; */
+}
+
+.hr-line{
+}
+
+.terms{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.term-item{
+    width: 578px;
+    height: 85px;
+    background-color: #F2F2F2;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.see-more{
+    margin: 10px;
 }
 
 
