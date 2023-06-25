@@ -13,7 +13,8 @@ input, button{
 }
 
 .App{
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,13 +22,15 @@ input, button{
 }
 
 form{
-    display: block;
+    display: flex;
     position: relative;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 form::after{
     content: '';
-    display: block;
     position: absolute;
     top: -5px;
     left: -5px;
@@ -100,9 +103,9 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     background-position: 100% 0%;
 }
 
-.welcome h2 span{
-    color: #FE4880;
-    font-weight: 700;
+.welcome-bar{
+    /* width: 1518px; */
+    height: 67px;
 }
 
 .error{
@@ -118,7 +121,8 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 
 .terms-list-right{
     background-image: linear-gradient(to top left, #FFCE00, #FE4880);
-    width: 527px;
+    min-width: 227px;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     padding-top: 100px;
@@ -143,7 +147,6 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     display: flex;
     justify-content: flex-end;
     margin-right: 10px;
-    /* background-color: aqua; */
 }
 
 .terms{
@@ -164,7 +167,20 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 }
 
 .see-more{
-    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 10px;
+    margin: auto;
+    padding: 10px;
+    background-color: #666;
+    border-radius: 3px;
+}
+
+.see-more{
+    cursor: pointer;
+    background-color: #888;
 }
 
 
