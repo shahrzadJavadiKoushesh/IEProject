@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 function CourseInfo(props){
-  const [numTerms, setNumTerms] = useState(8);
+  const [numTerms, setNumTerms] = useState(9);
   const [searchQuery, setSearchQuery] = useState("");
   const {selectedCourse, onClose} = props;
 
@@ -51,10 +51,11 @@ function CourseInfo(props){
         </div>
         <div className='terms'>
           {filteredCourses.slice(0, numTerms).map((student) => (
-            <div
-              className="term-item"
-            >
+            <div className="student-item">
+              <span>تایید</span>
+              <span>رد</span>
               {student}
+              <div className="img"></div>
             </div>
           ))}
         </div>
