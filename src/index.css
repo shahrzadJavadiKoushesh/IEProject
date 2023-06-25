@@ -146,9 +146,6 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     /* background-color: aqua; */
 }
 
-.hr-line{
-}
-
 .terms{
     display: flex;
     flex-wrap: wrap;
@@ -163,6 +160,7 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .see-more{
