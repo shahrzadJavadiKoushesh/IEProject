@@ -21,6 +21,8 @@ input, button{
     background-color: #53565A;
 }
 
+/* LOGIN PAGE */
+
 form{
     display: flex;
     position: relative;
@@ -103,8 +105,9 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     background-position: 100% 0%;
 }
 
+/* SUPERVISOR PAGE */
+
 .welcome-bar{
-    /* width: 1518px; */
     height: 67px;
 }
 
@@ -124,8 +127,25 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     min-width: 227px;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
     padding-top: 100px;
+}
+
+.next-page{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    border-radius: 80px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.next-page:hover{
+    cursor: pointer;
+    border-color: #53565A;
 }
 
 .left{

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 function AllTerms(){
   const [numTerms, setNumTerms] = useState(8);
 
@@ -48,6 +48,7 @@ function AllTerms(){
           {
             <div className='terms-list-right'>
               مشاهده لیست ترم‌ها
+              <button className="next-page"><FaArrowRight /></button>
             </div>
           }
         </div>
