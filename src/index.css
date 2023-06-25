@@ -180,6 +180,7 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     height: 85px;
     background-color: #F2F2F2;
     margin: 10px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
