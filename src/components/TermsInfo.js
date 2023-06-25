@@ -1,8 +1,10 @@
 import React, {useState} from "react";
+import CourseInfo from "./CourseInfo"; 
 
 function TermsInfo(props){
   const [numTerms, setNumTerms] = useState(6);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
 
   const {selectedTerm, onClose} = props;
 
@@ -11,8 +13,9 @@ function TermsInfo(props){
     setNumTerms(numTerms + 4)
   }
 
-  const goNextPage = () => {
-    console.log("CLICKED");
+  const handleCourseClick = (courseName) => {
+    console.log("Clicked on course:", courseName);
+    setSelectedCourse(courseName);
   }
 
   const courses = [
@@ -34,6 +37,10 @@ function TermsInfo(props){
     course.includes(searchQuery)
   );
 
+  if (selectedCourse) {
+    return <CourseInfo selectedTerm={selectedTerm} selectedCourse={selectedCourse} onClose={onClose} />;
+  }
+
   return (
     <div className='terms-container'> 
       <div className='left'>
@@ -51,7 +58,11 @@ function TermsInfo(props){
         </div>
         <div className='terms'>
           {filteredCourses.slice(0, numTerms).map((course) => (
-            <div className="term-item" onClick={goNextPage}>
+            <div
+              className="term-item"
+              onClick={() => handleCourseClick(course)}
+              key={course}
+            >
               {course}
             </div>
           ))}
