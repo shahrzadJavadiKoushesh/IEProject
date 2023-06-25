@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 
-
-function TermsInfo(){
+function TermsInfo(props){
   const [numTerms, setNumTerms] = useState(6);
+
+  const {selectedTerm, onClose} = props;
 
     const see_more = () => {
         console.log("see more");
@@ -30,8 +31,9 @@ function TermsInfo(){
     return (
         <div className='terms-container'> 
           <div className='left'>
-            <div className='welcome-bar'>
-              <h2>{}</h2>
+            <div className='term-bar'>
+              <h2>مشاهده اطلاعات ترم</h2>
+              <h2>دروس {selectedTerm}</h2>
             </div>
             <div className='terms'>
               {courses.slice(0, numTerms).map((course) =>(

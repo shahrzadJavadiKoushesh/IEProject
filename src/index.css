@@ -204,4 +204,14 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     background-color: #888;
 }
 
+.term-bar{
+    background-image: linear-gradient(to right, #FFCE00, #FE4880);
+    margin-bottom: 150px;
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
 
