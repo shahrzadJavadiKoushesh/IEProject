@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import LoginForm from './components/LoginForm';
 import AllTerms from './components/AllTerms'
 function App() {
-  const adminUser = {
+  const supervisor = {
     email: "admin@admin.com",
     password: "admin123"
   }
@@ -12,7 +12,7 @@ function App() {
 
   const Login = details => {
     console.log(details);
-    if (details.email === adminUser.email && details.password === adminUser.password){
+    if (details.email === supervisor.email && details.password === supervisor.password){
       console.log("Logged In");
       setUser({
         name: details.name,
