@@ -10,6 +10,7 @@ import SeeAllTErmsStudent from './components/SeeAllTermsStudent';
 import TermsInfoStudentRegistration from './components/TermsInfoStudentRegistration';
 import PreRegistrationCourses from './components/PreregistrationCourses';
 import EducationalAssistantMainPage from './components/EducationalAssistantMainPage';
+import EducationalAssistantEditTerms from './components/EducationalAssistantEditTerm';
 
 function App() {
     const navigate = useNavigate();
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/terms/terms_info" element={<TermsInfoStudentRegistration/>}/>
                 <Route path="/terms/terms_info/pre_register" element={<PreRegistrationCourses/>}/>
                 <Route path="/educational_assistant" element={<EducationalAssistantMainPage/>}/>
+                <Route path="/educational_assistant/edit_term" element={<EducationalAssistantEditTerms/>}/>
             </Routes>
         </div>
     );
