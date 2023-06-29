@@ -11,33 +11,42 @@ function EducationalAssistantMainPage(props) {
         setNumTerms(numTerms + 4)
     }
 
-    const terms = [
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-        ' ترم پاییز 1402',
-    ]
+    const addTerm = () => {
+        setTerms((prevTerms) => [...prevTerms, "ترم جدید"]);
+        console.log("Term added")
+    };
+
+    const [terms, setTerms] = useState([
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402",
+        " ترم پاییز 1402"
+    ]);
 
     return (
         <div className='terms-container'>
             <div className='left'>
                 <div className='bar'>
                 </div>
-                <div className='terms'>
-                    {terms.slice(0, numTerms).map((course, index) => (
+                <div className='terms-bar'>
+                    <div className="terms-bar-content add" onClick={addTerm}>افزودن ترم +</div>
+                    <div className="terms-bar-content">مشاهده لیست ترم‌ها</div>
+                </div>
+                <div className="terms">
+                    {terms.slice(0, numTerms).map((term, index) => (
                         <div className="course-item" key={index}>
                             <span className="cancle-registration">حذف</span>
                             <span className="complete-info"> ویرایش</span>
-                            <span>{terms[index]}</span>
+                            <span>{term}</span>
                         </div>
                     ))}
                 </div>
@@ -52,7 +61,7 @@ function EducationalAssistantMainPage(props) {
                     <div className="terms-right-content">مشاهده لیست ترم‌ها</div>
                     <div className="terms-right-content">مشاهده لیست دانشجویان</div>
                     <div className="terms-right-content">مشاهده لیست اساتید</div>
-                    
+
                 </div>
             }
         </div>
