@@ -6,6 +6,7 @@ import TermInfo from './components/TermsInfo'
 import {useNavigate} from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom';
 import SeeAllTErmsStudent from './components/SeeAllTermsStudent';
+import TermsInfoStudentRegistration from './components/TermsInfoStudentRegistration';
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/terms/:term_id" element={<TermInfo />}/>
                 <Route path="/courses/:course_id/registrations" element={<CourseRegistrations />}/>
                 <Route path="/terms/:term_id/all_terms" element={<SeeAllTErmsStudent />}/>
+                <Route path="/terms/terms_info" element={<TermsInfoStudentRegistration/>}/>
             </Routes>
         </div>
     );

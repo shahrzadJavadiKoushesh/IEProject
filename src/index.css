@@ -284,3 +284,40 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     width: 25%;
     margin: 10px 40px 0px 40px;
 }
+
+.terms-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.terms-info-content-item{
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 281px;
+    background-color: #F2F2F2;
+    margin: 10px 80px;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+}
+
+.circle {
+    width: 128px;
+    height: 131px;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+.circle-text{
+    width: 160px;
+    height: 54px;
+    margin-top: 20px;
+}
+
+.square{
+    width: 118px;
+    height: 105px;
+    background-color: #000;
+}
