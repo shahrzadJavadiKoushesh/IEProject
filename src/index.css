@@ -321,3 +321,44 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     height: 105px;
     background-color: #000;
 }
+
+.bar{
+    background-image: linear-gradient(to right, #FFCE00, #FE4880);
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.course-item{
+    width: 572px;
+    height: 93px;
+    background-color: #F2F2F2;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.complete-info{
+    width: 108px;
+    height: 40px;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.cancle-registration{
+    width: 108px;
+    height: 40px;
+    background-color: rgb(198, 56, 56);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
