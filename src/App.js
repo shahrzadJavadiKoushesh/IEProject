@@ -9,6 +9,7 @@ import http from './http';
 import SeeAllTErmsStudent from './components/SeeAllTermsStudent';
 import TermsInfoStudentRegistration from './components/TermsInfoStudentRegistration';
 import PreRegistrationCourses from './components/PreregistrationCourses';
+import EducationalAssistantMainPage from './components/EducationalAssistantMainPage';
 
 function App() {
     const navigate = useNavigate();
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/terms/:term_id/all_terms" element={<SeeAllTErmsStudent />}/>
                 <Route path="/terms/terms_info" element={<TermsInfoStudentRegistration/>}/>
                 <Route path="/terms/terms_info/pre_register" element={<PreRegistrationCourses/>}/>
+                <Route path="/educational_assistant" element={<EducationalAssistantMainPage/>}/>
             </Routes>
         </div>
     );

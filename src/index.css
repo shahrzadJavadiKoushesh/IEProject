@@ -362,3 +362,21 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     align-items: center;
     border-radius: 3px;
 }
+
+.terms-list-right-edu-ass{
+    background-image: linear-gradient(to top left, #FFCE00, #FE4880);
+    min-width: 227px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.terms-right-content{
+    padding: 10px;
+}
+
+.terms-right-content:hover{
+    cursor: pointer;
+}
