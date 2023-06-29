@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 function PreRegistrationCourses(props) {
     const [numTerms, setNumTerms] = useState(6);
     const [searchQuery, setSearchQuery] = useState("");
-    const { selectedCourse, onClose } = props;
     const { course_id: courseId } = useParams(); // todo: use courseId to get student list
 
     const see_more = () => {
@@ -60,7 +59,7 @@ function PreRegistrationCourses(props) {
                 <div className='terms'>
                     {filteredCourses.slice(0, numTerms).map((course, index) => (
                         <div className="course-item" key={index}>
-                            <span className="cancle-registration">لغو ثبت‌نام</span>
+                            <span className="cancle-registration">لغو</span>
                             <span className="complete-info">اطلاعات کامل</span>
                             <span>{course}</span>
                             <span>{professors[index]}</span>
