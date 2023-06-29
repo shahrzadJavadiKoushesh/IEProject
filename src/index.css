@@ -357,6 +357,10 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     border-radius: 3px;
 }
 
+.complete-info:hover{
+    cursor: pointer;
+}
+
 .cancle-registration{
     width: 108px;
     height: 40px;
@@ -464,5 +468,77 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 }
 
 .add-excel:hover{
+    cursor: pointer;
+}
+
+.edu-bar{
+    background-image: linear-gradient(to right, #FFCE00, #FE4880);
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.num-of-preregisteration{
+    padding: 5px;
+}
+
+.delete-registration{
+    width: 108px;
+    height: 40px;
+    background-color: rgb(198, 56, 56);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+.delete-registration:hover{
+    cursor: pointer;
+}
+
+.edu-upper-bar{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.download-excel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 15px;
+    width: 179px;
+    height: 41px;
+    background-color: rgb(74, 126, 22); ;
+}
+
+.download-excel:hover{
+    cursor: pointer;
+}
+
+.most-registered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.most-registered:hover{
+    cursor: pointer;
+}
+
+.least-registered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.least-registered:hover{
     cursor: pointer;
 }
