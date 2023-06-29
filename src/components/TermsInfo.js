@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import CourseInfo from "./CourseInfo";
 import {Link, useParams} from 'react-router-dom';
+import http from '../http'
 
 function TermsInfo(props) {
     const [numTerms, setNumTerms] = useState(6);
@@ -9,6 +10,9 @@ function TermsInfo(props) {
 
     const {selectedTerm, onClose} = props;
     const {term_id: termId} = useParams(); // TODO: use termId to fetch courses from server
+
+    const [fetched, setFetched] = useState(false);
+    const courses = useRef(Array());
 
     const see_more = () => {
         console.log("see more");
@@ -20,22 +24,39 @@ function TermsInfo(props) {
         setSelectedCourse(courseName);
     }
 
-    const courses = [
-        {id: 1, name: "مبانی برنامه‌نویسی"},
-        {id: 1, name: "برنامه‌نویسی پیشرفته"},
-        {id: 1, name: "ساختمان داده"},
-        {id: 1, name: "نظریه زبان‌ها و  ماشین‌ها"},
-        {id: 1, name: "مدارهای الکتریکی"},
-        {id: 1, name: " مدار منطقی"},
-        {id: 1, name: "آمار و احتمال"},
-        {id: 1, name: "معماری کامپیوتر"},
-        {id: 1, name: "شبکه‌های کامپیوتری"},
-        {id: 1, name: "سیستم عامل"},
-        {id: 1, name: "گرافیک کامپیوتری"},
-        {id: 1, name: "هوش مصنوعی"},
-    ];
+    if (!fetched) {
+        http.get(`terms/${termId}/registrations`).then(
+            res => {
+                return res.data.output
+            }
+        ).then(
+            output => {
+                courses.current = output
+                setFetched(!fetched)
+            }
+        ).catch(
+            e => console.log(e)
+        );
+    }
 
-    const filteredCourses = courses.filter((course) =>
+    // const courses = [
+    //     {id: 1, name: "مبانی برنامه‌نویسی"},
+    //     {id: 1, name: "برنامه‌نویسی پیشرفته"},
+    //     {id: 1, name: "ساختمان داده"},
+    //     {id: 1, name: "نظریه زبان‌ها و  ماشین‌ها"},
+    //     {id: 1, name: "مدارهای الکتریکی"},
+    //     {id: 1, name: " مدار منطقی"},
+    //     {id: 1, name: "آمار و احتمال"},
+    //     {id: 1, name: "معماری کامپیوتر"},
+    //     {id: 1, name: "شبکه‌های کامپیوتری"},
+    //     {id: 1, name: "سیستم عامل"},
+    //     {id: 1, name: "گرافیک کامپیوتری"},
+    //     {id: 1, name: "هوش مصنوعی"},
+    // ];
+
+
+
+    const filteredCourses = courses.current.filter((course) =>
         course.name.includes(searchQuery)
     );
 
@@ -60,7 +81,7 @@ function TermsInfo(props) {
                 </div>
                 <div className='terms'>
                     {filteredCourses.slice(0, numTerms).map((course) => (
-                        <Link to={`/courses/${course.id}/registrations`}>
+                        <Link to={`/courses/${course._id}/registrations`}>
                             <div className="term-item"> {course.name} </div>
                         </Link>
                     ))}
