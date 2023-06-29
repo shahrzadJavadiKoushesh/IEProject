@@ -11,6 +11,7 @@ import TermsInfoStudentRegistration from './components/TermsInfoStudentRegistrat
 import PreRegistrationCourses from './components/PreregistrationCourses';
 import EducationalAssistantMainPage from './components/EducationalAssistantMainPage';
 import EducationalAssistantEditTerms from './components/EducationalAssistantEditTerm';
+import EducationalAssistantPreregisterRegister from './components/EducationalAssistantPreregisterRegister';
 
 function App() {
     const navigate = useNavigate();
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/terms/terms_info/pre_register" element={<PreRegistrationCourses/>}/>
                 <Route path="/educational_assistant" element={<EducationalAssistantMainPage/>}/>
                 <Route path="/educational_assistant/edit_term" element={<EducationalAssistantEditTerms/>}/>
+                <Route path="/educational_assistant/preregister_register" element={<EducationalAssistantPreregisterRegister/>}/>
             </Routes>
         </div>
     );

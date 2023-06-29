@@ -312,6 +312,9 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 }
 
 .circle-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 160px;
     height: 54px;
     margin-top: 20px;
