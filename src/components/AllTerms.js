@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 
 import TermsInfo from "./TermsInfo";
+import {useNavigate, Link} from 'react-router-dom';
 
 function AllTerms(){
   const [numTerms, setNumTerms] = useState(8);
+
+  const navigate = useNavigate();
 
   const [selectedTerm, setSelectedTerm] = useState(null);
 
@@ -17,6 +20,7 @@ function AllTerms(){
   const handleTermClick = (term) => {
     console.log("Term clicked:", term);
     setSelectedTerm(term);
+    navigate('/')
     setShowTermsListRight(false);
   }
 
@@ -26,30 +30,30 @@ function AllTerms(){
   }
 
   const terms = [
-    "ترم 1",
-    "ترم 2",
-    "ترم 3",
-    "ترم 4",
-    "ترم 5",
-    "ترم 6",
-    "ترم 7",
-    "ترم 8",
-    "ترم 9",
-    "ترم 10",
-    "ترم 11",
-    "ترم 12",
-    "ترم 13",
-    "ترم 14",
-    "ترم 15",
-    "ترم 16",
-    "ترم 17",
-    "ترم 18",
-    "ترم 19",
-    "ترم 20",
+    {name: "ترم 1", id:1},
+    {name: "ترم 2", id:2},
+    {name: "ترم 3", id:3},
+    {name: "ترم 4", id:4},
+    {name: "ترم 5", id:5},
+    {name: "ترم 6", id:6},
+    {name: "ترم 7", id:7},
+    {name: "ترم 8", id:8},
+    {name: "ترم 9", id:9},
+    {name: "ترم 10", id:10},
+    {name: "ترم 11", id:11},
+    {name: "ترم 12", id:12},
+    {name: "ترم 13", id:13},
+    {name: "ترم 14", id:14},
+    {name: "ترم 15", id:15},
+    {name: "ترم 16", id:16},
+    {name: "ترم 17", id:17},
+    {name: "ترم 18", id:18},
+    {name: "ترم 19", id:19},
+    {name: "ترم 20", id:20},
   ];
 
   return (
-    <div className='terms-container'> 
+    <div className='terms-container'>
       {selectedTerm ? (
         <TermsInfo selectedTerm={selectedTerm} onClose={handleCloseTermsInfo} />
       ) : (
@@ -59,9 +63,11 @@ function AllTerms(){
           </div>
           <div className='terms'>
             {terms.slice(0, numTerms).map((term) =>(
-              <div className="term-item" onClick={() => handleTermClick(term)}>
-                {term}
+                <Link to={`/terms/${term.id}`}>
+              <div className="term-item">
+                {term.name}
               </div>
+                </Link>
             ))}
           </div>
           {numTerms < terms.length && (
