@@ -581,3 +581,20 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     cursor: pointer;
     background-color: rgba(26, 242, 26, 0.965);
 }
+
+/* IT MANAGER */
+
+.delete-student{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    width: 48px;
+    height: 21px;
+    background-color: rgb(198, 56, 56);
+}
+
+.delete-student:hover{
+    cursor: pointer;
+    background-color: rgb(217, 62, 62);
+}

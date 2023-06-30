@@ -15,6 +15,7 @@ import EducationalAssistantPreregisterRegister from './components/EducationalAss
 import EducationalAssistantPreregisteredCourses from './components/EducationalAssistantPreregisteredCourses';
 import EducationalAssistantAddNewCourse from './components/EducationalAssistantAddNewCourse';
 import EducationalAssistantPreregisteredStudents from './components/EducationalAssistantPreregisteredStudents';
+import ITManagerSeeAllStudents from './components/ITManagerSeeStudents';
 
 function App() {
     const navigate = useNavigate();
@@ -74,6 +75,7 @@ function App() {
                 {/*<Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>*/}
                 <Route path="/terms/terms_info/:term_id/:reg_type/course/add" element={<EducationalAssistantAddNewCourse/>}/>
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
+                <Route path="/ITManager/see_all_students" element={<ITManagerSeeAllStudents/>}/>
             </Routes>
         </div>
     );
