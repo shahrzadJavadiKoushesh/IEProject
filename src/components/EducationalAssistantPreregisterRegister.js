@@ -1,30 +1,10 @@
 import React, { useState } from "react";
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {Link} from "react-router-dom";
+import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
 function EducationalAssistantPreregisterRegister(props) {
     const [selected, setSelected] = React.useState("");
 
-    const [terms, setTerms] = useState([
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-    ]);
-
     const [age, setAge] = React.useState('');
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
 
     return (
         <div className="terms-container-edu">
@@ -36,15 +16,18 @@ function EducationalAssistantPreregisterRegister(props) {
                 <hr className="line"></hr>
 
                 <div className='terms-info'>
-                    <div className="terms-info-content-item">
-                        <div className='circle'></div>
-                        <div className="circle-text"> دروس ثبت نامی </div>
-                    </div>
-                    <div className="terms-info-content-item">
-                        <div className="square"></div>
-                        <div className="circle-text"> دروس پیش‌ثبت‌نامی </div>
-                    </div>
-                    
+                    <Link to={`register`} state={{readOnly: false}}>
+                        <div className="terms-info-content-item">
+                            <div className='circle'></div>
+                            <div className="circle-text"> دروس ثبت نامی </div>
+                        </div>
+                    </Link>
+                    <Link to={`pre_register`} state={{readOnly: false}}>
+                        <div className="terms-info-content-item">
+                            <div className="square"></div>
+                            <div className="circle-text"> دروس پیش‌ثبت‌نامی </div>
+                        </div>
+                    </Link>
                 </div>
 
             </div>

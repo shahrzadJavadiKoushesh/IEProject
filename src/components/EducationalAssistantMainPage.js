@@ -1,10 +1,37 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, {useState, useRef} from "react";
+import http from "../http";
+import {useNavigate, Link} from 'react-router-dom';
+
+
+function deleteTerm(termId, setFetched, fetched) {
+    http.del(`terms/${termId}`).then(
+        () => setFetched(!fetched)
+    ).catch(err => {
+        console.log(err)
+    })
+}
 
 function EducationalAssistantMainPage(props) {
     const [numTerms, setNumTerms] = useState(6);
-    const [searchQuery, setSearchQuery] = useState("");
-    const { course_id: courseId } = useParams(); // todo: use courseId to get student list
+
+    const [fetched, setFetched] = useState(false);
+    const terms = useRef([]);
+    const navigate = useNavigate()
+
+    if (!fetched) {
+        http.get('terms').then(
+            res => {
+                return res.data.output
+            }
+        ).then(
+            output => {
+                terms.current = output
+                setFetched(!fetched)
+            }
+        ).catch(
+            e => console.log(e)
+        );
+    }
 
     const see_more = () => {
         console.log("see more");
@@ -12,25 +39,8 @@ function EducationalAssistantMainPage(props) {
     }
 
     const addTerm = () => {
-        setTerms((prevTerms) => [...prevTerms, "ترم جدید"]);
-        console.log("Term added")
+        navigate('/terms/add')
     };
-
-    const [terms, setTerms] = useState([
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402",
-        " ترم پاییز 1402"
-    ]);
 
     return (
         <div className='terms-container'>
@@ -42,15 +52,18 @@ function EducationalAssistantMainPage(props) {
                     <div className="terms-bar-content">مشاهده لیست ترم‌ها</div>
                 </div>
                 <div className="terms">
-                    {terms.slice(0, numTerms).map((term, index) => (
-                        <div className="course-item" key={index}>
-                            <span className="cancle-registration">حذف</span>
-                            <span className="complete-info"> ویرایش</span>
-                            <span>{term}</span>
-                        </div>
+                    {terms.current.slice(0, numTerms).map((term, index) => (
+                        <Link to={`/terms/terms_info/${term._id}`}>
+                            <div className="course-item" key={index}>
+                                <span className="cancle-registration"
+                                      onClick={() => deleteTerm(term._id, setFetched, fetched)}>حذف</span>
+                                <span className="complete-info"> ویرایش</span>
+                                <span>{term.name}</span>
+                            </div>
+                        </Link>
                     ))}
                 </div>
-                {numTerms < terms.length && (
+                {numTerms < terms.current.length && (
                     <button onClick={see_more} className="see-more">
                         مشاهده بیشتر
                     </button>
