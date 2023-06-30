@@ -52,6 +52,7 @@ function PreRegistrationCourses(props) {
     const {term_id: termId} = useParams();
     const mode = props.mode // prereg or reg
 
+
     const see_more = () => {
         console.log("see more");
         setNumTerms(numTerms + 4)
@@ -91,7 +92,7 @@ function PreRegistrationCourses(props) {
     return (<div className='terms-container'>
         <div className='left'>
             <div className='edu-bar'>
-                <Link to={`/terms/terms_info/649eb91cb66c8175637abe17/${mode}/course/add`}><h2>+</h2></Link>
+                <Link to={`/terms/terms_info/${termId}/${mode}/course/add`}><h2>+</h2></Link>
                 <h2>مشاهده لیست دروس ارائه شده برای {getPersianModeName(mode)}</h2>
             </div>
             <div className="search-bar">
