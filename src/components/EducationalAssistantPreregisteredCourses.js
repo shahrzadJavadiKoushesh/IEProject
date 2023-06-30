@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 function EducationalAssistantPreregisteredCourses(props) {
     const [numTerms, setNumTerms] = useState(6);
     const [searchQuery, setSearchQuery] = useState("");
+    const [showAddCourseItem, setShowAddCourseItem] = useState(false); // new state variable
     const { course_id: courseId } = useParams(); // todo: use courseId to get student list
 
     const see_more = () => {
@@ -42,13 +43,24 @@ function EducationalAssistantPreregisteredCourses(props) {
         student.includes(searchQuery)
     );
 
+    // new function to handle form submission
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // add new course to courses array
+        courses.push(event.target.elements.courseName.value);
+        // hide the add course item form
+        setShowAddCourseItem(false);
+    };
+
     return (
         <div className='terms-container'>
             <div className='left'>
                 <div className='edu-bar'>
-                    <h2>افزودن درس +</h2>
+                    {/* toggle the showAddCourseItem state */}
+                    <h2 onClick={() => setShowAddCourseItem(true)}>افزودن درس +</h2>
                     <h2> دروس پیش‌ثبت‌نامی ترم پاییز 1402  </h2>
                 </div>
+
                 <div className="edu-upper-bar">
                     <div className="download-excel">دانلود اکسل</div>
                     <span className="most-registered">بیشترین تعداد ثبت نامی</span>
@@ -65,6 +77,16 @@ function EducationalAssistantPreregisteredCourses(props) {
                 </div>
 
                 <div className='terms'>
+                    {showAddCourseItem && ( // conditionally render the new course item form
+                        <div className="course-item" key={courses.length}>
+                            <span className="delete-registration">حذف</span>
+                            <span className="complete-info">اطلاعات کامل</span>
+                            <span className="num-of-preregisteration">32 پیش‌ثبت‌نام</span>
+                            <span>{courses[1]}</span>
+                            <span>{professors[1]}</span>
+                        </div>
+                
+                    )}
                     {filteredCourses.slice(0, numTerms).map((course, index) => (
                         <div className="course-item" key={index}>
                             <span className="delete-registration">حذف</span>
@@ -91,4 +113,4 @@ function EducationalAssistantPreregisteredCourses(props) {
     )
 }
 
-export default EducationalAssistantPreregisteredCourses   
+export default EducationalAssistantPreregisteredCourses
