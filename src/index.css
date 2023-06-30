@@ -598,3 +598,10 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     cursor: pointer;
     background-color: rgb(217, 62, 62);
 }
+
+.IT-upper-bar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
