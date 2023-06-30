@@ -17,6 +17,7 @@ import EducationalAssistantAddNewCourse from './components/EducationalAssistantA
 import EducationalAssistantPreregisteredStudents from './components/EducationalAssistantPreregisteredStudents';
 import ITManagerSeeAllStudents from './components/ITManagerSeeStudents';
 import ITManagerSeeAllInstructors from './components/ITManagerSeeInstructors';
+import ITManagerSeeSUbmitChangesForStudents from './components/ITManagerSubmitOrChangeStudentsInfo';
 
 function App() {
     const navigate = useNavigate();
@@ -78,6 +79,7 @@ function App() {
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
                 <Route path="/ITManager/see_all_students" element={<ITManagerSeeAllStudents/>}/>
                 <Route path="/ITManager/see_all_instructors" element={<ITManagerSeeAllInstructors/>}/>
+                <Route path="/ITManager/submit_changes" element={<ITManagerSeeSUbmitChangesForStudents/>}/>
             </Routes>
         </div>
     );
