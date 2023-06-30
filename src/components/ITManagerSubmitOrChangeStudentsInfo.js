@@ -1,24 +1,35 @@
 import React, { useState } from 'react'
 import {
     FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
+    TextField,
 } from "@material-ui/core";
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
 
     const [selectedFaculty, setSelectedFaculty] = useState("");
     const [selectedMajor, setSelectedMajor] = useState("");
 
-    const handleFacultyChange = (event) => {
-        setSelectedFaculty(event.target.value);
+    const handleFacultyChange = (event, value) => {
+        setSelectedFaculty(value);
     };
 
-    const handleMajorChange = (event) => {
-        setSelectedMajor(event.target.value);
+    const handleMajorChange = (event, value) => {
+        setSelectedMajor(value);
     };
+
+    const faculties = [
+        { label: 'faculty 1', value: 'instructor 1' },
+        { label: 'faculty 2', value: 'instructor 2' },
+        { label: 'faculty 3', value: 'instructor 3' },
+    ];
+
+    const majors = [
+        { label: 'major 1', value: 'instructor 1' },
+        { label: 'major 2', value: 'instructor 2' },
+        { label: 'major 3', value: 'instructor 3' },
+    ];
+
     return (
         <div className='terms-container'>
             <div className='left'>
@@ -33,37 +44,25 @@ function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
                         <form>
                             <div className='form-inner'>
                                 <label>دانشکده</label>
-                                <FormControl fullWidth>
-                                    <InputLabel id="instructor-select-label">
-
-                                    </InputLabel>
-                                    <Select
-                                        labelId="instructor-select-label"
-                                        id="instructor-select"
-                                        value={selectedFaculty}
-                                        onChange={handleFacultyChange}
-                                    >
-                                        <MenuItem value={"instructor 2"}>faculty 2</MenuItem>
-                                        <MenuItem value={"instructor 1"}>faculty 1</MenuItem>
-                                        <MenuItem value={"instructor 3"}>faculty 3</MenuItem>
-                                    </Select>
-                                </FormControl>
-
-                                <FormControl fullWidth>
-                                    <label>رشته</label>
-                                    <InputLabel id="instructor-select-label">
-                                    </InputLabel>
-                                    <Select
-                                        labelId="instructor-select-label"
-                                        id="instructor-select"
-                                        value={selectedMajor}
-                                        onChange={handleMajorChange}
-                                    >
-                                        <MenuItem value={"instructor 2"}>major 2</MenuItem>
-                                        <MenuItem value={"instructor 1"}>major 1</MenuItem>
-                                        <MenuItem value={"instructor 3"}>major 3</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <Autocomplete
+                                    options={faculties}
+                                    getOptionLabel={(option) => option.label}
+                                    value={selectedFaculty}
+                                    onChange={handleFacultyChange}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="" variant="outlined" />
+                                    )}
+                                />
+                                <label>رشته</label>
+                                <Autocomplete
+                                    options={majors}
+                                    getOptionLabel={(option) => option.label}
+                                    value={selectedMajor}
+                                    onChange={handleMajorChange}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="" variant="outlined" />
+                                    )}
+                                />
                                 <div className='form-group'>
                                     <label className='personal-info-label'>سال ورود</label>
                                     <input type='text' name='text' id='email'></input>
