@@ -14,6 +14,8 @@ function AllTerms() {
     const [fetched, setFetched] = useState(false);
     const terms = useRef(Array());
 
+    const role = localStorage.getItem("role");
+
     const see_more = () => {
         console.log("see more");
         setNumTerms(numTerms + 4)
@@ -39,6 +41,12 @@ function AllTerms() {
             e => console.log(e)
         );
     }
+    const linkGetter = (role, term_id) => {
+        switch (role) {
+            case "professor": return `/terms/${term_id}/registrations_courses`
+            case "student": return `/terms/terms_info/${term_id}`
+        }
+    }
 
     return (
         <div className='terms-container'>
@@ -51,7 +59,7 @@ function AllTerms() {
                     </div>
                     <div className='terms'>
                         {terms.current.slice(0, numTerms).map((term) => (
-                            <Link to={`/terms/${term._id}/registrations_courses`}>
+                            <Link to={linkGetter(role, term._id)}>
                                 <div className="term-item">
                                     {term.name}
                                 </div>

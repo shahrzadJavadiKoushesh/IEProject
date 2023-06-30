@@ -371,6 +371,16 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
     border-radius: 3px;
 }
 
+.create-registration{
+    width: 108px;
+    height: 40px;
+    background-color: rgb(81, 135, 60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
 /* EDUCATIONAL ASSISTANT */
 
 .terms-list-right-edu-ass{
