@@ -28,6 +28,7 @@ function App() {
             res => {
                 if (res.status === 200) {
                     localStorage.setItem("authorization", res.data.token)
+                    localStorage.setItem("role", res.data.role)
                     navigate('/terms')
                 } else {
                     throw new Error()
@@ -43,22 +44,16 @@ function App() {
 
     return (
         <div className="App">
-            {/*{user.email === "supervisor.email" ? (*/}
-            {/*    <AllTerms/>*/}
-            {/*) : user.email === "student.email" ? (*/}
-            {/*    <LastTerms/>*/}
-            {/*) : (*/}
-            {/*    <LoginForm Login={Login} error={error}/>*/}
-            {/*)}*/}
-
             <Routes>
                 <Route path="/login" element={<LoginForm Login={Login} error={error}/>}/>
                 <Route path="/terms" element={<AllTerms/>}/>
                 <Route path="/terms/:term_id/registrations_courses" element={<TermInfo/>}/>
-                <Route path="/courses/:course_id/registrations" element={<CourseRegistrations />}/>
-                <Route path="/terms/:term_id/all_terms" element={<SeeAllTErmsStudent />}/>
-                <Route path="/terms/terms_info" element={<TermsInfoStudentRegistration/>}/>
-                <Route path="/terms/terms_info/pre_register" element={<PreRegistrationCourses/>}/>
+                <Route path="/courses/:course_id/registrations" element={<CourseRegistrations/>}/>
+                <Route path="/terms/:term_id/all_terms" element={<SeeAllTErmsStudent/>}/>
+                <Route path="/terms/terms_info/:term_id" element={<TermsInfoStudentRegistration/>}/>
+                <Route path="/terms/terms_info/:term_id/pre_register"
+                       element={<PreRegistrationCourses mode={'prereg'}/>}/>
+                <Route path="/terms/terms_info/:term_id/register" element={<PreRegistrationCourses mode={'reg'}/>}/>
                 <Route path="/educational_assistant" element={<EducationalAssistantMainPage/>}/>
                 <Route path="/educational_assistant/edit_term" element={<EducationalAssistantEditTerms/>}/>
                 <Route path="/educational_assistant/preregister_register" element={<EducationalAssistantPreregisterRegister/>}/>

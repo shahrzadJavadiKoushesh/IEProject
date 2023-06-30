@@ -35,8 +35,20 @@ function put(url, data={}) {
         data: data
     })
 }
+
+function del(url) {
+    const token = localStorage.getItem("authorization")
+    return axios.request({
+        url: `${serverUrl}/${url}`,
+        method: "delete",
+        headers: {
+            authorization: token
+        }
+    })
+}
 export default Object.freeze({
     get,
     post,
     put,
+    del,
 })
