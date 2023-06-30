@@ -564,3 +564,19 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 .calendar-container{
     display: flex;
 }
+
+.submit-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 64px;
+    background-color: rgb(67, 220, 67);
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.submit-btn:hover{
+    cursor: pointer;
+    background-color: rgba(26, 242, 26, 0.965);
+}

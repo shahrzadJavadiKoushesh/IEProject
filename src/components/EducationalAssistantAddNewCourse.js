@@ -111,6 +111,8 @@ function EducationalAssistantEditTerms(props) {
             </div>
           </div>
         </form>
+
+        <div className="submit-btn">ثبت جدید/تغییر اطلاعات</div>
       </div>
       <div className="terms-list-right-edu-ass">
         <div className="terms-right-content">مشاهده لیست ترم‌ها</div>
