@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {useParams, useLocation} from "react-router-dom";
+import {useParams, useLocation, Link} from "react-router-dom";
 import http from "../http";
 
 // for manager
@@ -90,7 +90,8 @@ function PreRegistrationCourses(props) {
 
     return (<div className='terms-container'>
         <div className='left'>
-            <div className='bar'>
+            <div className='edu-bar'>
+                <Link to={`/terms/terms_info/649eb91cb66c8175637abe17/${mode}/course/add`}><h2>+</h2></Link>
                 <h2>مشاهده لیست دروس ارائه شده برای {getPersianModeName(mode)}</h2>
             </div>
             <div className="search-bar">

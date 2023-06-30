@@ -120,6 +120,7 @@ form .form-inner input[type="submit"]:hover, .welcome button:hover{
 
 .terms-container{
     display: flex;
+    width: 100%;
 }
 
 .terms-list-right{

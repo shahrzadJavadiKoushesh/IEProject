@@ -43,23 +43,36 @@ function App() {
 
     }
 
+    let TermComponent, TermInfoComponent, RegistrationComponent
+    switch (localStorage.getItem("role")) {
+        case "manager":
+            TermComponent = EducationalAssistantMainPage
+            TermInfoComponent = EducationalAssistantPreregisterRegister
+            RegistrationComponent = PreRegistrationCourses
+            break
+        case "professor":
+        case "student":
+            TermComponent = AllTerms
+            TermInfoComponent = TermsInfoStudentRegistration
+            RegistrationComponent = PreRegistrationCourses
+    }
+
     return (
         <div className="App">
             <Routes>
                 <Route path="/login" element={<LoginForm Login={Login} error={error}/>}/>
-                <Route path="/terms" element={<AllTerms/>}/>
+                <Route path="/terms" element={<TermComponent/>}/>
                 <Route path="/terms/:term_id/registrations_courses" element={<TermInfo/>}/>
                 <Route path="/courses/:course_id/registrations" element={<CourseRegistrations/>}/>
                 <Route path="/terms/:term_id/all_terms" element={<SeeAllTErmsStudent/>}/>
-                <Route path="/terms/terms_info/:term_id" element={<TermsInfoStudentRegistration/>}/>
+                <Route path="/terms/terms_info/:term_id" element={<TermInfoComponent/>}/>
                 <Route path="/terms/terms_info/:term_id/pre_register"
-                       element={<PreRegistrationCourses mode={'prereg'}/>}/>
-                <Route path="/terms/terms_info/:term_id/register" element={<PreRegistrationCourses mode={'reg'}/>}/>
-                <Route path="/educational_assistant" element={<EducationalAssistantMainPage/>}/>
-                <Route path="/educational_assistant/edit_term" element={<EducationalAssistantEditTerms/>}/>
-                <Route path="/educational_assistant/preregister_register" element={<EducationalAssistantPreregisterRegister/>}/>
-                <Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>
-                <Route path="/educational_assistant/add_new_course" element={<EducationalAssistantAddNewCourse/>}/>
+                       element={<RegistrationComponent mode={'prereg'}/>}/>
+                <Route path="/terms/terms_info/:term_id/register" element={<RegistrationComponent mode={'reg'}/>}/>
+                <Route path="/terms/add" element={<EducationalAssistantEditTerms/>}/>
+                {/*<Route path="/terms/:term_id/" element={<EducationalAssistantPreregisterRegister/>}/>*/}
+                {/*<Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>*/}
+                <Route path="/terms/terms_info/:term_id/:reg_type/course/add" element={<EducationalAssistantAddNewCourse/>}/>
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
             </Routes>
         </div>
