@@ -59,7 +59,7 @@ function PreRegistrationCourses(props) {
     }
 
     const [fetched, setFetched] = useState(false);
-    const preRegs = useRef(Array());
+    const preRegs = useRef([]);
 
     const location = useLocation()
     const {readOnly} = location.state
@@ -134,6 +134,8 @@ function getPersianModeName(mode) {
             return "پیش‌ثبت‌نام"
         case "reg":
             return "‌ثبت‌نام"
+        default:
+            return ""
     }
 }
 

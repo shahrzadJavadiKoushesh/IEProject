@@ -12,7 +12,7 @@ function AllTerms() {
     const [showTermsListRight, setShowTermsListRight] = useState(true);
 
     const [fetched, setFetched] = useState(false);
-    const terms = useRef(Array());
+    const terms = useRef([]);
 
     const role = localStorage.getItem("role");
 

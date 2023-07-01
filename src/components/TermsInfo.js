@@ -12,16 +12,11 @@ function TermsInfo(props) {
     const {term_id: termId} = useParams(); // TODO: use termId to fetch courses from server
 
     const [fetched, setFetched] = useState(false);
-    const courses = useRef(Array());
+    const courses = useRef([]);
 
     const see_more = () => {
         console.log("see more");
         setNumTerms(numTerms + 4)
-    }
-
-    const handleCourseClick = (courseName) => {
-        console.log("Clicked on course:", courseName);
-        setSelectedCourse(courseName);
     }
 
     if (!fetched) {

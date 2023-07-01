@@ -1,42 +1,49 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, {useState, useRef} from "react";
+import {useNavigate} from "react-router-dom";
+import http from "../http";
+
+
 
 function ITManagerSeeAllStudents(props) {
     const [numTerms, setNumTerms] = useState(9);
 
     const see_more = () => {
-        console.log("see more");
         setNumTerms(numTerms + 4)
     }
 
+    const [fetched, setFetched] = useState(false);
+    const navigate = useNavigate();
+    const usertype = props.usertype;
+
+
     const addStudent = () => {
-        setStudents((prevStu) => [...prevStu, "دانشجوی جدید"]);
-        console.log("student added")
+        navigate('add')
     };
 
-    const deleteStudent = (index) => {
-        const newStudents = [...students];
-        newStudents.splice(index, 1);
-        setStudents(newStudents);
-        console.log("student deleted");
+    function deleteStudent(studentId, setFetched, fetched) {
+        http.del(`admin/${usertype}/${studentId}`).then(
+            () => setFetched(!fetched)
+        ).catch(err => {
+            console.log(err)
+        })
     }
 
-    const [students, setStudents] = useState([
-        'حسن امیدی',
-        'حسن شریفی',
-        'محمد رضا کاظمی',
-        'سجاد قاسمی',
-        'فاطمه محمودی',
-        'رضا عباسی',
-        'علی رحمانی',
-        'نیما شاهدی',
-        'مهدی عسگری',
-        'محمد نوری',
-        'امید شجاع',
-        'سید محمد حسینی',
-        'سعید امیری',
-        'علی محمدی',
-    ]);
+
+    const students = useRef([]);
+    if (!fetched) {
+        http.get(`admin/${usertype}`).then(
+            res => {
+                return res.data.output
+            }
+        ).then(
+            output => {
+                students.current = output
+                setFetched(!fetched)
+            }
+        ).catch(
+            e => console.log(e)
+        );
+    }
 
     return (
         <div className='terms-container'>
@@ -44,19 +51,20 @@ function ITManagerSeeAllStudents(props) {
                 <div className='bar'>
                 </div>
                 <div className='terms-bar'>
-                    <div className="terms-bar-content add" onClick={addStudent}>افزودن دانشجو +</div>
-                    <div className="terms-bar-content">مشاهده لیست دانشجویان</div>
+                    <div className="terms-bar-content add" onClick={addStudent}>افزودن {getPersianUsertype(usertype)} +</div>
+                    <div className="terms-bar-content">مشاهده لیست {getPersianUsertype(usertype)}ها</div>
                 </div>
                 <div className="terms">
-                    {students.slice(0, numTerms).map((student, index) => (
+                    {students.current.slice(0, numTerms).map((student, index) => (
                         <div className="student-item" key={index}>
-                            <span className="delete-student" onClick={() => deleteStudent(index)}>حذف</span>
-                            <span>{student}</span>
+                            <span className="delete-student"
+                                  onClick={() => deleteStudent(student._id, setFetched, fetched)}>حذف</span>
+                            <span>{student.fullname}</span>
                             <div className="img"></div>
                         </div>
                     ))}
                 </div>
-                {numTerms < students.length && (
+                {numTerms < students.current.length && (
                     <button onClick={see_more} className="see-more">
                         مشاهده بیشتر
                     </button>
@@ -64,14 +72,20 @@ function ITManagerSeeAllStudents(props) {
             </div>
             {
                 <div className='terms-list-right-edu-ass'>
-                    <div className="terms-right-content">مشاهده لیست دانشجویان</div>
-                    <div className="terms-right-content">مشاهده لیست اساتید</div>
-                    <div className="terms-right-content">مشاهده لیست مدیران</div>
-
+                    <a className="terms-right-content" href="/students">مشاهده لیست دانشجویان</a>
+                    <a className="terms-right-content" href="/professors">مشاهده لیست اساتید</a>
+                    <a className="terms-right-content" href="/managers">مشاهده لیست مدیران</a>
                 </div>
             }
         </div>
     )
+}
+function getPersianUsertype(usertype) {
+    switch (usertype) {
+        case "student": return "دانشجو";
+        case "manager": return "معاون";
+        case "professor": return "استاد";
+    }
 }
 
 export default ITManagerSeeAllStudents;
