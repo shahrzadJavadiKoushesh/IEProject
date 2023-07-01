@@ -1,12 +1,20 @@
 import React, {useState, useRef} from "react";
 import {useParams} from "react-router-dom";
 import http from "../http";
-function actionCourse(regId, action) {
+import AbstractItem from "../new-components/AbstractItem";
+import {IconButton} from "@material-ui/core";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+
+function actionCourse(regId, action, setFetched, fetched) {
     http.put(`registration/${regId}`, {
         action: action
     }).then(
         res => {
-            console.log(`${regId} ${action}ed`)
+            setFetched(!fetched);
         }
     ).catch(
         e => console.log(e)
@@ -63,12 +71,26 @@ function CourseInfo(props) {
                 </div>
                 <div className='terms'>
                     {filteredRegistrations.slice(0, numTerms).map((reg) => (
-                        <div className="student-item">
-                            <span onClick={()=>{actionCourse(reg._id, "accept")}}>تایید</span>
-                            <span onClick={()=>{actionCourse(reg._id, "reject")}}>رد</span>
-                            {reg.requestedStudent.fullname}
-                            <div className="img"></div>
-                        </div>
+                        // <div className="student-item">
+                        //     <span onClick={()=>{actionCourse(reg._id, "accept")}}>تایید</span>
+                        //     <span onClick={()=>{actionCourse(reg._id, "reject")}}>رد</span>
+                        //     {reg.requestedStudent.fullname}
+                        //     <div className="img"></div>
+                        // </div>
+                        <AbstractItem data={{
+                            buttons: [{
+                                component: IconButton,
+                                onClick: () => {actionCourse(reg._id, "accept", setFetched, fetched)},
+                                icon: reg.status==="accept"?ThumbUpAltIcon:ThumbUpOffAltIcon,
+                                color: "primary"
+                            },{
+                                component: IconButton,
+                                onClick: () => {actionCourse(reg._id, "reject", setFetched, fetched)},
+                                icon: reg.status==="reject"?ThumbDownAltIcon:ThumbDownOffAltIcon,
+                                color: "error"
+                            }],
+                            title: reg.requestedStudent.fullname,
+                        }}/>
                     ))}
                 </div>
                 {numTerms < filteredRegistrations.length && (

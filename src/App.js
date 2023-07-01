@@ -79,14 +79,11 @@ function App() {
                        element={<RegistrationComponent mode={'prereg'}/>}/>
                 <Route path="/terms/terms_info/:term_id/register" element={<RegistrationComponent mode={'reg'}/>}/>
                 <Route path="/terms/add" element={<EducationalAssistantEditTerms/>}/>
-                {/*<Route path="/terms/:term_id/" element={<EducationalAssistantPreregisterRegister/>}/>*/}
-                {/*<Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>*/}
                 <Route path="/terms/terms_info/:term_id/:reg_type/course/add" element={<EducationalAssistantAddNewCourse/>}/>
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
                 <Route path="/students" element={<ITManagerSeeAllStudents usertype="student"/>}/>
                 <Route path="/professors" element={<ITManagerSeeAllStudents usertype="professor"/>}/>
                 <Route path="/managers" element={<ITManagerSeeAllStudents usertype="manager"/>}/>
-                {/*<Route path="/ITManager/see_all_instructors" element={<ITManagerSeeAllInstructors/>}/>*/}
                 <Route path="/students/add" element={<ITManagerSeeSUbmitChangesForStudents/>}/>
             </Routes>
         </div>
