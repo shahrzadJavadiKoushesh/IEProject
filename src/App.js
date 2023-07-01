@@ -33,7 +33,13 @@ function App() {
                 if (res.status === 200) {
                     localStorage.setItem("authorization", res.data.token)
                     localStorage.setItem("role", res.data.role)
-                    navigate('/terms')
+                    switch (res.data.role) {
+                        case "it_manager":
+                            navigate('/students')
+                            break
+                        default:
+                            navigate('/terms')
+                    }
                 } else {
                     throw new Error()
                 }
@@ -77,9 +83,11 @@ function App() {
                 {/*<Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>*/}
                 <Route path="/terms/terms_info/:term_id/:reg_type/course/add" element={<EducationalAssistantAddNewCourse/>}/>
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
-                <Route path="/ITManager/see_all_students" element={<ITManagerSeeAllStudents/>}/>
-                <Route path="/ITManager/see_all_instructors" element={<ITManagerSeeAllInstructors/>}/>
-                <Route path="/ITManager/submit_changes" element={<ITManagerSeeSUbmitChangesForStudents/>}/>
+                <Route path="/students" element={<ITManagerSeeAllStudents usertype="student"/>}/>
+                <Route path="/professors" element={<ITManagerSeeAllStudents usertype="professor"/>}/>
+                <Route path="/managers" element={<ITManagerSeeAllStudents usertype="manager"/>}/>
+                {/*<Route path="/ITManager/see_all_instructors" element={<ITManagerSeeAllInstructors/>}/>*/}
+                <Route path="/students/add" element={<ITManagerSeeSUbmitChangesForStudents/>}/>
             </Routes>
         </div>
     );

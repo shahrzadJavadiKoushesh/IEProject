@@ -19,7 +19,7 @@ function CourseInfo(props) {
     const {course_id: courseId} = useParams(); // todo: use courseId to get student list
 
     const [fetched, setFetched] = useState(false);
-    const registrations = useRef(Array());
+    const registrations = useRef([]);
 
     const see_more = () => {
         console.log("see more");

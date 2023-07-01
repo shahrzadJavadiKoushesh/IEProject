@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     FormControl,
     TextField,
 } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import http from "../http";
+import {useNavigate} from "react-router-dom";
 
-function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
+
+function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
 
     const [selectedFaculty, setSelectedFaculty] = useState("");
     const [selectedMajor, setSelectedMajor] = useState("");
+    const navigate = useNavigate();
 
     const handleFacultyChange = (event, value) => {
         setSelectedFaculty(value);
@@ -18,16 +22,36 @@ function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
         setSelectedMajor(value);
     };
 
+    const addStudent = (e) => {
+        e.preventDefault();
+
+        const form = e.target
+        const requestData = {}
+        for (const element of form.elements) {
+            if ("name" in element) {
+                requestData[element.name] = element.value
+            }
+        }
+        requestData['fullname'] = requestData['firstname'] + " " + requestData['lastname']
+
+        http.post('admin/student', requestData).then(
+            () => {
+                navigate(-1)
+            }).catch(err => {
+            console.log(err)
+        })
+    }
+
     const faculties = [
-        { label: 'faculty 1', value: 'instructor 1' },
-        { label: 'faculty 2', value: 'instructor 2' },
-        { label: 'faculty 3', value: 'instructor 3' },
+        {label: 'faculty 1', value: 'instructor 1'},
+        {label: 'faculty 2', value: 'instructor 2'},
+        {label: 'faculty 3', value: 'instructor 3'},
     ];
 
     const majors = [
-        { label: 'major 1', value: 'instructor 1' },
-        { label: 'major 2', value: 'instructor 2' },
-        { label: 'major 3', value: 'instructor 3' },
+        {label: 'major 1', value: 'instructor 1'},
+        {label: 'major 2', value: 'instructor 2'},
+        {label: 'major 3', value: 'instructor 3'},
     ];
 
     return (
@@ -40,17 +64,43 @@ function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
                 </div>
 
                 <div className='it-container'>
-                    <div className='educational-info'>
-                        <form>
+                    <div className='personal-info'>
+                        <form onSubmit={addStudent}>
                             <div className='form-inner'>
+
+                                <div className='form-group'>
+                                    <label className='personal-info-label'>نام</label>
+                                    <input type='text' name='firstname' id='email'></input>
+                                </div>
+
+                                <div className='form-group'>
+                                    <label className='personal-info-label'>نام خانوادگی:</label>
+                                    <input type='text' name='lastname'></input>
+                                </div>
+
+                                <div className='form-group'>
+                                    <label className='personal-info-label'>شماره دانشجویی</label>
+                                    <input type='text' name='usercode'></input>
+                                </div>
+
+                                <div className='form-group'>
+                                    <label className='personal-info-label'>کد ملی</label>
+                                    <input type='text' name='password'></input>
+                                </div>
+
+                                <div className='form-group'>
+                                    <label className='personal-info-label'>دروس پاس کرده</label>
+                                    <input type='text'></input>
+                                </div>
                                 <label>دانشکده</label>
                                 <Autocomplete
                                     options={faculties}
                                     getOptionLabel={(option) => option.label}
+                                    name="college"
                                     value={selectedFaculty}
                                     onChange={handleFacultyChange}
                                     renderInput={(params) => (
-                                        <TextField {...params} label="" variant="outlined" />
+                                        <TextField {...params} label="" variant="outlined"/>
                                     )}
                                 />
                                 <label>رشته</label>
@@ -58,9 +108,10 @@ function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
                                     options={majors}
                                     getOptionLabel={(option) => option.label}
                                     value={selectedMajor}
+                                    name="studyField"
                                     onChange={handleMajorChange}
                                     renderInput={(params) => (
-                                        <TextField {...params} label="" variant="outlined" />
+                                        <TextField {...params} label="" variant="outlined"/>
                                     )}
                                 />
                                 <div className='form-group'>
@@ -72,39 +123,7 @@ function ITManagerSeeSUbmitChangesForStudents({ Login, error }) {
                                     <label className='personal-info-label'>استاد راهنما</label>
                                     <input type='text' name='text' id='email'></input>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className='personal-info'>
-                        <form >
-                            <div className='form-inner'>
-
-                                <div className='form-group'>
-                                    <label className='personal-info-label'>نام</label>
-                                    <input type='text' name='text' id='email'></input>
-                                </div>
-
-                                <div className='form-group'>
-                                    <label className='personal-info-label'>نام خانوادگی:</label>
-                                    <input type='text' name='password' ></input>
-                                </div>
-
-                                <div className='form-group'>
-                                    <label className='personal-info-label'>شماره دانشجویی</label>
-                                    <input type='text' name='password' ></input>
-                                </div>
-
-                                <div className='form-group'>
-                                    <label className='personal-info-label'>کد ملی</label>
-                                    <input type='text' name='password' ></input>
-                                </div>
-
-                                <div className='form-group'>
-                                    <label className='personal-info-label'>دروس پاس کرده</label>
-                                    <input type='text' name='password' ></input>
-                                </div>
-
-                                <input type='submit' value="افزودن" />
+                                <input type='submit' value="افزودن"/>
 
                                 {error !== "" ? (<div className='error'>{error}</div>) : ""}
 
