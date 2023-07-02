@@ -1,5 +1,4 @@
-import {Button, IconButton} from "@material-ui/core";
-import AddIcon from "@mui/icons-material/Add"
+import {Button} from "@material-ui/core";
 
 function TopBar(props) {
     const buttons = props.data.buttons;
@@ -15,7 +14,8 @@ function TopBar(props) {
                         size="small"
                         variant="outlined"
                         onClick={el.onClickHandler}
-                        startIcon={<AddIcon />}>
+                        startIcon={(el.icon)?<el.icon />:""}
+                    >
                         {el.text}
                     </Button>
                 ))}

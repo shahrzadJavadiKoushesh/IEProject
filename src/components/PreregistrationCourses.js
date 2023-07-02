@@ -1,6 +1,11 @@
 import React, {useState, useRef} from "react";
-import {useParams, useLocation, Link} from "react-router-dom";
+import {useParams, useLocation, Link, useNavigate} from "react-router-dom";
 import http from "../http";
+import TopBar from "../new-components/TopBar";
+import SideBar from "../new-components/SideBar";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AddIcon from "@mui/icons-material/Add";
+import Signout from "../new-components/Signout";
 
 // for manager
 function deletePreReg(termId, courseId, setFetched, fetched) {
@@ -60,6 +65,7 @@ function PreRegistrationCourses(props) {
 
     const [fetched, setFetched] = useState(false);
     const preRegs = useRef([]);
+    const navigate = useNavigate();
 
     const location = useLocation()
     const {readOnly} = location.state
@@ -89,12 +95,36 @@ function PreRegistrationCourses(props) {
             throw new Error("invalid registration mode")
     }
 
+    const buttons = [{
+        text: "بازگشت",
+        onClickHandler: () => {
+            navigate(-1)
+        },
+        icon: ArrowBackIcon,
+    }]
+
+    if (localStorage.getItem("role") === "manager") {
+        buttons.push({
+            text: "افزودن",
+            onClickHandler: () => {
+                navigate(`/terms/terms_info/${termId}/${mode}/course/add`)
+            },
+            icon: AddIcon,
+        })
+    }
+
+
     return (<div className='terms-container'>
         <div className='left'>
-            <div className='edu-bar'>
-                <Link to={`/terms/terms_info/${termId}/${mode}/course/add`}><h2>+</h2></Link>
-                <h2>مشاهده لیست دروس ارائه شده برای {getPersianModeName(mode)}</h2>
+            <div className='bar'>
+                <Signout/>
             </div>
+            <TopBar data={{
+                buttons: buttons,
+                barTitle: `مشاهده لیست دروس ارائه شده برای ${getPersianModeName(mode)}`
+            }}/>
+
+                {/*<Link to={`/terms/terms_info/${termId}/${mode}/course/add`}><h2>+</h2></Link>*/}
             <div className="search-bar">
                 <input
                     type="text"
@@ -122,9 +152,14 @@ function PreRegistrationCourses(props) {
                 مشاهده بیشتر
             </button>)}
         </div>
-        {<div className='terms-list-right'>
-            مشاهده لیست ترم‌ها
-        </div>}
+        <SideBar data={{
+            items: [
+                {
+                    text: "مشاهده لیست ترم‌ها",
+                    url: "/terms"
+                },
+            ]
+        }} />
     </div>)
 }
 

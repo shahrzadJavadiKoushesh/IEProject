@@ -1,6 +1,8 @@
 import React, {useState, useRef} from "react";
 import http from "../http";
 import {useNavigate, Link} from 'react-router-dom';
+import SideBar from "../new-components/SideBar";
+import Signout from "../new-components/Signout";
 
 
 function deleteTerm(termId, setFetched, fetched) {
@@ -46,6 +48,7 @@ function EducationalAssistantMainPage(props) {
         <div className='terms-container'>
             <div className='left'>
                 <div className='bar'>
+                    <Signout/>
                 </div>
                 <div className='terms-bar'>
                     <div className="terms-bar-content add" onClick={addTerm}>افزودن ترم +</div>
@@ -69,14 +72,22 @@ function EducationalAssistantMainPage(props) {
                     </button>
                 )}
             </div>
-            {
-                <div className='terms-list-right-edu-ass'>
-                    <div className="terms-right-content">مشاهده لیست ترم‌ها</div>
-                    <div className="terms-right-content">مشاهده لیست دانشجویان</div>
-                    <div className="terms-right-content">مشاهده لیست اساتید</div>
+            {/*{*/}
+            {/*    <div className='terms-list-right-edu-ass'>*/}
+            {/*        <div className="terms-right-content">مشاهده لیست ترم‌ها</div>*/}
+            {/*        <div className="terms-right-content">مشاهده لیست دانشجویان</div>*/}
+            {/*        <div className="terms-right-content">مشاهده لیست اساتید</div>*/}
 
-                </div>
-            }
+            {/*    </div>*/}
+            {/*}*/}
+            <SideBar data={{
+                items: [
+                    {
+                        text: "مشاهده لیست ترم‌ها",
+                        url: "/terms"
+                    }
+                ]
+            }}/>
         </div>
     )
 }

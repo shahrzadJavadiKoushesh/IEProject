@@ -10,8 +10,7 @@ import SideBar from "../new-components/SideBar";
 import TopBar from "../new-components/TopBar";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Form from "../new-components/Form"
-import Signout from "../new-components/Signout";
-
+import Signout from '../new-components/Signout';
 function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
 
     const navigate = useNavigate();
@@ -118,7 +117,7 @@ function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
         <div className='terms-container'>
             <div className='left'>
                 <div className='bar'>
-                    <Signout/>
+                    <Signout />
                 </div>
                 <TopBar data={{
                     buttons: [{
@@ -131,14 +130,13 @@ function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
                     barTitle: "ثبت/تغییر اطلاعات دانشجو"
                 }}/>
                 <div className='it-container'>
-                    <div className={"form-wrapper"}>
-
+                    <div className='personal-info'>
                         <Form data={{
                             buttonData: buttonData,
-                            fields: formFields,
-                            submitHandler: addStudent,
+                            fields: formFields
                         }}/>
                     </div>
+
                 </div>
 
 

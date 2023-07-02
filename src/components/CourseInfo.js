@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import http from "../http";
 import AbstractItem from "../new-components/AbstractItem";
 import {IconButton} from "@material-ui/core";
@@ -8,6 +8,11 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import SideBar from "../new-components/SideBar";
+import TopBar from "../new-components/TopBar";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Signout from "../new-components/Signout";
 
 function actionCourse(regId, action, setFetched, fetched) {
     http.put(`registration/${regId}`, {
@@ -28,7 +33,7 @@ function CourseInfo(props) {
 
     const [fetched, setFetched] = useState(false);
     const registrations = useRef([]);
-
+    const navigate = useNavigate();
     const see_more = () => {
         console.log("see more");
         setNumTerms(numTerms + 4)
@@ -57,10 +62,22 @@ function CourseInfo(props) {
     return (
         <div className='terms-container'>
             <div className='left'>
-                <div className='term-bar'>
-                    <h2>تعداد کل ثبت‌نامی‌ها: {registrations.current.length} نفر</h2>
-                    <h2>درس {selectedCourse}</h2>
+                <div className='bar'>
+                    <Signout/>
                 </div>
+                <TopBar data={{
+                    buttons: [{
+                        text: "بازگشت",
+                        onClickHandler: () => {
+                            navigate(-1)
+                        },
+                        icon: ArrowBackIcon,
+                    },{
+                        text: `تعداد کل ثبت‌نامی‌ها: ${registrations.current.length}`,
+                        onClickHandler: ()=>{},
+                    }],
+                    barTitle: `درس ${selectedCourse}`
+                }}/>
                 <div className="search-bar">
                     <input
                         type="text"
@@ -99,11 +116,14 @@ function CourseInfo(props) {
                     </button>
                 )}
             </div>
-            {
-                <div className='terms-list-right'>
-                    مشاهده لیست ترم‌ها
-                </div>
-            }
+            <SideBar data={{
+                items: [
+                    {
+                        text: "مشاهده لیست ترم‌ها",
+                        url: "/terms"
+                    },
+                ]
+            }} />
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import Signout from "../new-components/Signout";
 
 function ITManagerSeeAllInstructors(props) {
     const [numTerms, setNumTerms] = useState(9);
@@ -49,6 +50,7 @@ function ITManagerSeeAllInstructors(props) {
         <div className='terms-container'>
             <div className='left'>
                 <div className='bar'>
+                    <Signout/>
                 </div>
                 <div className='terms-bar'>
                     <div className="terms-bar-content add" onClick={addInstructor}>افزودن استاد +</div>

@@ -4,9 +4,14 @@ import {
     FormControl,
     InputLabel,
     Select,
-    MenuItem,
+    MenuItem, Input, TextField,
 } from "@material-ui/core";
 import {useNavigate} from "react-router-dom";
+import TopBar from "../new-components/TopBar";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Form from "../new-components/Form";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Signout from "../new-components/Signout";
 
 function EducationalAssistantEditTerms(props) {
     const [termName, setTermName] = useState("");
@@ -52,68 +57,37 @@ function EducationalAssistantEditTerms(props) {
     return (
         <div className="terms-container-edu">
             <div className="left-edu">
-                <div className="bar"></div>
-                <div className="terms-bar-content">ویرایش اطلاعات ترم پاییز 1402</div>
-                <hr className="line"></hr>
-                <form onSubmit={addTerm}>
-                    <div className="form-inner">
-                        <div className="form-group">
-                            <label className="name-of-term">نام ترم</label>
-                            <input
-                                type="text"
-                                id="terms-name"
-                                name="name"
-                                value={termName}
-                                onChange={(event) => setTermName(event.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <FormControl fullWidth>
-                                <InputLabel id="instructor-select-label">لیست اساتید</InputLabel>
-                                <Select
-                                    labelId="instructor-select-label"
-                                    id="instructor-select"
-                                    value={selectedInstructor}
-                                    onChange={handleInstructorChange}
-                                >
-                                    <MenuItem value={"instructor 1"}>instructor 1</MenuItem>
-                                    <MenuItem value={"instructor 2"}>instructor 2</MenuItem>
-                                    <MenuItem value={"instructor 3"}>instructor 3</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <div className="btn-container">
-                                {/* pass handleAddInstructor as onClick callback */}
-                                <div className="add-instructor" onClick={handleAddInstructor}>
-                                    افزودن
-                                </div>
-                                <div className="add-excel">آپلود اکسل</div>
-                            </div>
-                            <FormControl fullWidth>
-                                <InputLabel id="student-select-label">لیست دانشجویان</InputLabel>
-                                <Select
-                                    labelId="student-select-label"
-                                    id="student-select"
-                                    value={selectedStudent}
-                                    onChange={handleStudentChange}
-                                >
-                                    <MenuItem value={"student 1"}>student 1</MenuItem>
-                                    <MenuItem value={"student 2"}>student 2</MenuItem>
-                                    <MenuItem value={"student 3"}>student 3</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <div className="btn-container">
-                                {/* pass handleAddStudent as onClick callback */}
-                                <div className="add-instructor" onClick={handleAddStudent}>
-                                    افزودن
-                                </div>
-                                <div className="add-excel">آپلود اکسل</div>
-                            </div>
-                        </div>
-                        <input type='submit' value="افزودن"/>
+                <div className='bar'>
+                    <Signout/>
+                </div>
+                <TopBar data={{
+                    buttons: [{
+                        text: "بازگشت",
+                        onClickHandler: () => {
+                            navigate(-1)
+                        },
+                        icon: ArrowBackIcon,
+                    }],
+                    barTitle: `ثبت / ویرایش اطلاعات ترم`
+                }}/>
+                <div className='it-container'>
+                    <div className={"form-wrapper"}>
 
+                        <Form data={{
+                            buttonData: {
+                                text: "ثبت"
+                            },
+                            fields: [{
+                                title: "نام ترم",
+                                type: "text",
+                                name: "name",
+                                component: Input,
+                            }],
+                            submitHandler: addTerm,
+                        }}/>
                     </div>
+                </div>
 
-                </form>
             </div>
             <div className="terms-list-right-edu-ass">
                 <div className="terms-right-content">مشاهده لیست ترم‌ها</div>

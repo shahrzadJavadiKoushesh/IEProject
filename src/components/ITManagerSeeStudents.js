@@ -4,6 +4,8 @@ import http from "../http";
 import ListItem from "../new-components/ListItem";
 import SideBar from "../new-components/SideBar";
 import TopBar from "../new-components/TopBar";
+import AddIcon from "@mui/icons-material/Add";
+import Signout from "../new-components/Signout";
 
 
 function ITManagerSeeAllStudents(props) {
@@ -51,11 +53,13 @@ function ITManagerSeeAllStudents(props) {
         <div className='terms-container'>
             <div className='left'>
                 <div className='bar'>
+                    <Signout/>
                 </div>
                 <TopBar data={{
                     buttons: [{
                         text: "افزودن",
                         onClickHandler: addStudent,
+                        icon: AddIcon,
                     }],
                     barTitle: `مشاهده لیست ${getPersianUsertype(usertype)}ها`
                 }}/>

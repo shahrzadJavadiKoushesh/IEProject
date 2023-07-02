@@ -53,7 +53,7 @@ function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
         }
         requestData['fullname'] = requestData['firstname'] + " " + requestData['lastname']
 
-        http.post('admin/student', requestData).then(
+        http.post('admin/manager', requestData).then(
             () => {
                 navigate(-1)
             }).catch(err => {
@@ -128,7 +128,7 @@ function ITManagerSeeSUbmitChangesForStudents({Login, error}) {
                         },
                         icon: ArrowBackIcon,
                     }],
-                    barTitle: "ثبت/تغییر اطلاعات دانشجو"
+                    barTitle: "ثبت/تغییر اطلاعات معاون آموزشی"
                 }}/>
                 <div className='it-container'>
                     <div className={"form-wrapper"}>
