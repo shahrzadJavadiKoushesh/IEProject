@@ -399,6 +399,10 @@ input, button {
     padding: 15px;
 }
 
+.text-in-dark {
+    color: #FAFAFA;
+}
+
 .add:hover {
     cursor: pointer;
 }
@@ -680,6 +684,10 @@ input, button {
     border-radius: 5px;
 }
 
+.dark-bg {
+    background-color: darkslategray;
+}
+
 .list-item-img {
     height: 100%;
     width: auto;
@@ -710,6 +718,10 @@ span {
 .side-bar-wrapper {
     background-color: #303F9F;
     width: 25%;
+}
+
+.dark-side-bar {
+    background-color: #263238;
 }
 
 .side-bar-item {

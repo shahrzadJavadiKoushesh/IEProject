@@ -12,6 +12,7 @@ function Signout(props) {
         style={{height: "30px", margin: "3px"}}
         onClick={()=>{
             http.post('logout').then((res)=>{
+                navigate('/login');
             }).catch(err=>{
                 if (err.response.status === 498) {
                     navigate('/login');
