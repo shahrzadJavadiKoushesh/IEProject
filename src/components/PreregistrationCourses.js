@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {useParams, useLocation, Link, useNavigate} from "react-router-dom";
+import {useParams, useLocation, Link, useNavigate, useSearchParams} from "react-router-dom";
 import http from "../http";
 import TopBar from "../new-components/TopBar";
 import SideBar from "../new-components/SideBar";
@@ -53,7 +53,7 @@ function cancelReg(courseId, setFetched, fetched) {
 
 function PreRegistrationCourses(props) {
     const [numTerms, setNumTerms] = useState(6);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams({});
     const {term_id: termId} = useParams();
     const mode = props.mode // prereg or reg
 
@@ -68,7 +68,7 @@ function PreRegistrationCourses(props) {
     const navigate = useNavigate();
 
     const location = useLocation()
-    const {readOnly} = location.state
+    const {readOnly} = location.state || {readOnly: false}
     if (!fetched) {
         http.get(`terms/${termId}/${mode}istrations${readOnly ? ('?registered=true') : ('')}`).then(res => {
             return res.data.output
@@ -78,7 +78,7 @@ function PreRegistrationCourses(props) {
         }).catch(e => console.log(e));
     }
 
-    const filteredPreRegs = preRegs.current.filter((course) => course.name.includes(searchQuery));
+    const filteredPreRegs = preRegs.current.filter((course) => course.name.includes(searchParams.get('q') || ""));
     let deleter, canceler, creator
     switch (mode) {
         case "prereg":
@@ -98,7 +98,7 @@ function PreRegistrationCourses(props) {
     const buttons = [{
         text: "بازگشت",
         onClickHandler: () => {
-            navigate(-1)
+            navigate(`/terms/terms_info/${termId}`)
         },
         icon: ArrowBackIcon,
     }]
@@ -129,8 +129,12 @@ function PreRegistrationCourses(props) {
                 <input
                     type="text"
                     placeholder="جستجو بر اساس نام درس"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={searchParams.get('q')}
+                    onChange={(e) => {
+                        setSearchParams({
+                            q: e.target.value
+                        })
+                    }}
                 />
             </div>
             <div className='terms'>
