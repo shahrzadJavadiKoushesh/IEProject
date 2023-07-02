@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom";
-import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
+import Signout from "../new-components/Signout";
 function EducationalAssistantPreregisterRegister(props) {
     const [selected, setSelected] = React.useState("");
 
@@ -9,7 +9,9 @@ function EducationalAssistantPreregisterRegister(props) {
     return (
         <div className="terms-container-edu">
             <div className="left-edu">
-                <div className="bar"></div>
+                <div className="bar">
+                    <Signout />
+                </div>
                 <div className="terms-bar-content">
                     ترم پاییز 1402
                 </div>

@@ -2,12 +2,17 @@ import React, {useState, useRef} from "react";
 import CourseInfo from "./CourseInfo";
 import {Link, useParams} from 'react-router-dom';
 import http from '../http'
+import TopBar from "../new-components/TopBar";
+import SideBar from "../new-components/SideBar";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from 'react-router-dom';
+import Signout from "../new-components/Signout";
 
 function TermsInfo(props) {
     const [numTerms, setNumTerms] = useState(6);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCourse, setSelectedCourse] = useState("");
-
+    const navigate = useNavigate();
     const {selectedTerm, onClose} = props;
     const {term_id: termId} = useParams(); // TODO: use termId to fetch courses from server
 
@@ -34,22 +39,6 @@ function TermsInfo(props) {
         );
     }
 
-    // const courses = [
-    //     {id: 1, name: "مبانی برنامه‌نویسی"},
-    //     {id: 1, name: "برنامه‌نویسی پیشرفته"},
-    //     {id: 1, name: "ساختمان داده"},
-    //     {id: 1, name: "نظریه زبان‌ها و  ماشین‌ها"},
-    //     {id: 1, name: "مدارهای الکتریکی"},
-    //     {id: 1, name: " مدار منطقی"},
-    //     {id: 1, name: "آمار و احتمال"},
-    //     {id: 1, name: "معماری کامپیوتر"},
-    //     {id: 1, name: "شبکه‌های کامپیوتری"},
-    //     {id: 1, name: "سیستم عامل"},
-    //     {id: 1, name: "گرافیک کامپیوتری"},
-    //     {id: 1, name: "هوش مصنوعی"},
-    // ];
-
-
 
     const filteredCourses = courses.current.filter((course) =>
         course.name.includes(searchQuery)
@@ -62,10 +51,19 @@ function TermsInfo(props) {
     return (
         <div className='terms-container'>
             <div className='left'>
-                <div className='term-bar'>
-                    <h2>مشاهده اطلاعات ترم</h2>
-                    <h2>دروس {selectedTerm}</h2>
+                <div className='bar'>
+                    <Signout/>
                 </div>
+                <TopBar data={{
+                    buttons: [{
+                        text: "بازگشت",
+                        onClickHandler: () => {
+                            navigate(-1)
+                        },
+                        icon: ArrowBackIcon,
+                    }],
+                    barTitle: "مشاهده اطلاعات ترم"
+                }}/>
                 <div className="search-bar">
                     <input
                         type="text"
@@ -87,11 +85,14 @@ function TermsInfo(props) {
                     </button>
                 )}
             </div>
-            {
-                <div className='terms-list-right'>
-                    مشاهده لیست ترم‌ها
-                </div>
-            }
+            <SideBar data={{
+                items: [
+                    {
+                        text: "مشاهده لیست ترم‌ها",
+                        url: "/terms"
+                    },
+                ]
+            }} />
         </div>
     )
 }

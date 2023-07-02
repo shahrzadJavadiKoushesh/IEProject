@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import Signout from "../new-components/Signout";
 
 function EducationalAssistantPreregisteredStudents(props) {
     const [numTerms, setNumTerms] = useState(9);
@@ -38,6 +39,7 @@ function EducationalAssistantPreregisteredStudents(props) {
             <div className='left'>
                 <div className='bar'>
                     <h2>لیست پیش ثبت نام های درس آمار و احتمال مهندسی دکتر عبدوس</h2>
+                    <Signout/>
                 </div>
 
                 <div className="edu-upper-bar">

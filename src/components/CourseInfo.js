@@ -1,12 +1,25 @@
 import React, {useState, useRef} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import http from "../http";
-function actionCourse(regId, action) {
+import AbstractItem from "../new-components/AbstractItem";
+import {IconButton} from "@material-ui/core";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import SideBar from "../new-components/SideBar";
+import TopBar from "../new-components/TopBar";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Signout from "../new-components/Signout";
+
+function actionCourse(regId, action, setFetched, fetched) {
     http.put(`registration/${regId}`, {
         action: action
     }).then(
         res => {
-            console.log(`${regId} ${action}ed`)
+            setFetched(!fetched);
         }
     ).catch(
         e => console.log(e)
@@ -20,7 +33,7 @@ function CourseInfo(props) {
 
     const [fetched, setFetched] = useState(false);
     const registrations = useRef([]);
-
+    const navigate = useNavigate();
     const see_more = () => {
         console.log("see more");
         setNumTerms(numTerms + 4)
@@ -49,10 +62,22 @@ function CourseInfo(props) {
     return (
         <div className='terms-container'>
             <div className='left'>
-                <div className='term-bar'>
-                    <h2>تعداد کل ثبت‌نامی‌ها: {registrations.current.length} نفر</h2>
-                    <h2>درس {selectedCourse}</h2>
+                <div className='bar'>
+                    <Signout/>
                 </div>
+                <TopBar data={{
+                    buttons: [{
+                        text: "بازگشت",
+                        onClickHandler: () => {
+                            navigate(-1)
+                        },
+                        icon: ArrowBackIcon,
+                    },{
+                        text: `تعداد کل ثبت‌نامی‌ها: ${registrations.current.length}`,
+                        onClickHandler: ()=>{},
+                    }],
+                    barTitle: `درس ${selectedCourse}`
+                }}/>
                 <div className="search-bar">
                     <input
                         type="text"
@@ -63,12 +88,26 @@ function CourseInfo(props) {
                 </div>
                 <div className='terms'>
                     {filteredRegistrations.slice(0, numTerms).map((reg) => (
-                        <div className="student-item">
-                            <span onClick={()=>{actionCourse(reg._id, "accept")}}>تایید</span>
-                            <span onClick={()=>{actionCourse(reg._id, "reject")}}>رد</span>
-                            {reg.requestedStudent.fullname}
-                            <div className="img"></div>
-                        </div>
+                        // <div className="student-item">
+                        //     <span onClick={()=>{actionCourse(reg._id, "accept")}}>تایید</span>
+                        //     <span onClick={()=>{actionCourse(reg._id, "reject")}}>رد</span>
+                        //     {reg.requestedStudent.fullname}
+                        //     <div className="img"></div>
+                        // </div>
+                        <AbstractItem data={{
+                            buttons: [{
+                                component: IconButton,
+                                onClick: () => {actionCourse(reg._id, "accept", setFetched, fetched)},
+                                icon: reg.status==="accept"?ThumbUpAltIcon:ThumbUpOffAltIcon,
+                                color: "primary"
+                            },{
+                                component: IconButton,
+                                onClick: () => {actionCourse(reg._id, "reject", setFetched, fetched)},
+                                icon: reg.status==="reject"?ThumbDownAltIcon:ThumbDownOffAltIcon,
+                                color: "error"
+                            }],
+                            title: reg.requestedStudent.fullname,
+                        }}/>
                     ))}
                 </div>
                 {numTerms < filteredRegistrations.length && (
@@ -77,11 +116,14 @@ function CourseInfo(props) {
                     </button>
                 )}
             </div>
-            {
-                <div className='terms-list-right'>
-                    مشاهده لیست ترم‌ها
-                </div>
-            }
+            <SideBar data={{
+                items: [
+                    {
+                        text: "مشاهده لیست ترم‌ها",
+                        url: "/terms"
+                    },
+                ]
+            }} />
         </div>
     )
 }

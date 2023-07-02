@@ -3,8 +3,7 @@ import LoginForm from './components/LoginForm';
 import AllTerms from './components/AllTerms'
 import CourseRegistrations from './components/CourseInfo';
 import TermInfo from './components/TermsInfo'
-import {useNavigate} from 'react-router-dom';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useNavigate, Redirect} from 'react-router-dom';
 import http from './http';
 import SeeAllTErmsStudent from './components/SeeAllTermsStudent';
 import TermsInfoStudentRegistration from './components/TermsInfoStudentRegistration';
@@ -17,7 +16,10 @@ import EducationalAssistantAddNewCourse from './components/EducationalAssistantA
 import EducationalAssistantPreregisteredStudents from './components/EducationalAssistantPreregisteredStudents';
 import ITManagerSeeAllStudents from './components/ITManagerSeeStudents';
 import ITManagerSeeAllInstructors from './components/ITManagerSeeInstructors';
-import ITManagerSeeSUbmitChangesForStudents from './components/ITManagerSubmitOrChangeStudentsInfo';
+import ITManagerSubmitOrChangeManagerInfo from "./components/ITManagerSubmitOrChangeManagerInfo";
+import ITManagerSubmitOrChangeStudentsInfo from './components/ITManagerSubmitOrChangeStudentsInfo';
+import ITManagerSubmitOrChangeProfessorInfo from "./components/ITManagerSubmitOrChangeProfessorInfo";
+import Sample from "./components/Sample";
 
 function App() {
     const navigate = useNavigate();
@@ -69,6 +71,7 @@ function App() {
     return (
         <div className="App">
             <Routes>
+                {/*<Route path="/" element={ <Redirect to="/login" /> }/>*/}
                 <Route path="/login" element={<LoginForm Login={Login} error={error}/>}/>
                 <Route path="/terms" element={<TermComponent/>}/>
                 <Route path="/terms/:term_id/registrations_courses" element={<TermInfo/>}/>
@@ -79,15 +82,15 @@ function App() {
                        element={<RegistrationComponent mode={'prereg'}/>}/>
                 <Route path="/terms/terms_info/:term_id/register" element={<RegistrationComponent mode={'reg'}/>}/>
                 <Route path="/terms/add" element={<EducationalAssistantEditTerms/>}/>
-                {/*<Route path="/terms/:term_id/" element={<EducationalAssistantPreregisterRegister/>}/>*/}
-                {/*<Route path="/educational_assistant/preregister_courses" element={<EducationalAssistantPreregisteredCourses/>}/>*/}
                 <Route path="/terms/terms_info/:term_id/:reg_type/course/add" element={<EducationalAssistantAddNewCourse/>}/>
                 <Route path="/educational_assistant/preregistered_students" element={<EducationalAssistantPreregisteredStudents/>}/>
                 <Route path="/students" element={<ITManagerSeeAllStudents usertype="student"/>}/>
                 <Route path="/professors" element={<ITManagerSeeAllStudents usertype="professor"/>}/>
                 <Route path="/managers" element={<ITManagerSeeAllStudents usertype="manager"/>}/>
-                {/*<Route path="/ITManager/see_all_instructors" element={<ITManagerSeeAllInstructors/>}/>*/}
-                <Route path="/students/add" element={<ITManagerSeeSUbmitChangesForStudents/>}/>
+                <Route path="/students/add" element={<ITManagerSubmitOrChangeStudentsInfo/>}/>
+                <Route path="/managers/add" element={<ITManagerSubmitOrChangeManagerInfo />}/>
+                <Route path="/professors/add" element={<ITManagerSubmitOrChangeProfessorInfo/>}/>
+                <Route path="/sample" element={<Sample />}/>
             </Routes>
         </div>
     );
